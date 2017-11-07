@@ -8,6 +8,6 @@
  *
  * @author J_Carillo
  */
-public class Rocket {
+public class Rocket extends Shell{
     
 }

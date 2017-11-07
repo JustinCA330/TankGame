@@ -8,6 +8,6 @@
  *
  * @author J_Carillo
  */
-public class Bouncing2 {
+public class Bouncing2 extends Bouncing{
     
 }

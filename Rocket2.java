@@ -8,6 +8,6 @@
  *
  * @author J_Carillo
  */
-public class Rocket2 {
+public class Rocket2 extends Rocket{
     
 }

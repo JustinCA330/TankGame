@@ -8,6 +8,6 @@
  *
  * @author J_Carillo
  */
-public class Shell2 {
+public class Shell2 extends Shell{
     
 }

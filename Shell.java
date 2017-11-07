@@ -8,6 +8,21 @@
  *
  * @author J_Carillo
  */
-public class Shell {
+import java.awt.*;
+import java.awt.image.ImageObserver;
+public class Shell extends Collision{
+
+    private Point location, speed;
+    int strength;
+    Tank owner;
+    
+    public Shell(Point location, Point speed, int strength, Tank owner){
+        this.location = location;
+        this.speed = speed;
+        this.strength = strength;
+        this.owner = owner;
+        
+    }
+    public void draw(Graphics g, ImageObserver obs){}
     
 }

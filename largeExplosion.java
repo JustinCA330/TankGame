@@ -8,6 +8,6 @@
  *
  * @author J_Carillo
  */
-public class largeExplosion {
+public class largeExplosion extends Explosion{
     
 }

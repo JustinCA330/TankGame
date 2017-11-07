@@ -8,6 +8,6 @@
  *
  * @author J_Carillo
  */
-public class Bouncing {
+public class Bouncing extends Shell{
     
 }
