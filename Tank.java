@@ -29,6 +29,7 @@ public class Tank {
     static {
 
         tankImags = new Image[]{
+            
             tk.getImage(BombTank.class.getResource("Images/tankD.gif")),
             tk.getImage(BombTank.class.getResource("Images/tankU.gif")),
             tk.getImage(BombTank.class.getResource("Images/tankL.gif")),
@@ -40,11 +41,10 @@ public class Tank {
             tk.getImage(BombTank.class.getResource("Images/HtankD2.gif")),
             tk.getImage(BombTank.class.getResource("Images/HtankU2.gif")),
             tk.getImage(BombTank.class.getResource("Images/HtankL2.gif")),
-            tk.getImage(BombTank.class.getResource("Images/HtankR2.gif")),
-        };
+            tk.getImage(BombTank.class.getResource("Images/HtankR2.gif")),};
     }
 
-    public Tank(int x, int y, boolean good) { 
+    public Tank(int x, int y, boolean good) {
 
         this.x = x;
         this.y = y;
@@ -65,7 +65,7 @@ public class Tank {
 
     public void draw(Graphics g) {
 
-        if (!live) { 
+        if (!live) {
             if (!good) {
 
                 tc.tanks.remove(this);
@@ -78,7 +78,7 @@ public class Tank {
 
         switch (Kdirection) { //delete all the player == 1 instructions
             case D:
-                if (player == 1) { 
+                if (player == 1) {
 
                     g.drawImage(tankImags[4], x, y, null);
 
@@ -86,9 +86,6 @@ public class Tank {
 
                     g.drawImage(tankImags[8], x, y, null);
 
-                } else {
-
-                    g.drawImage(tankImags[0], x, y, null);
                 }
                 break;
 
@@ -101,42 +98,31 @@ public class Tank {
 
                     g.drawImage(tankImags[9], x, y, null);
 
-                } else {
-
-                    g.drawImage(tankImags[1], x, y, null);
-                }
+                } 
                 break;
 
             case L:
                 if (player == 1) {
-                    
+
                     g.drawImage(tankImags[6], x, y, null);
-                    
+
                 } else if (tc.Player2 && player == 2) {
-                    
+
                     g.drawImage(tankImags[10], x, y, null);
-                    
-                } else {
-                    
-                    g.drawImage(tankImags[2], x, y, null);
-                    
-                }
+
+                } 
                 break;
 
             case R:
                 if (player == 1) {
-                    
+
                     g.drawImage(tankImags[7], x, y, null);
-                    
+
                 } else if (tc.Player2 && player == 2) {
-                    
+
                     g.drawImage(tankImags[11], x, y, null);
-                    
-                } else {
-                    
-                    g.drawImage(tankImags[3], x, y, null);
-                    
-                }
+
+                } 
                 break;
         }
         move();
@@ -151,30 +137,30 @@ public class Tank {
             case L:
                 x -= speedX;
                 break;
-                
+
             case U:
                 y -= speedY;
                 break;
-                
+
             case R:
                 x += speedX;
                 break;
-                
+
             case D:
                 y += speedY;
                 break;
-                
+
             case STOP:
                 break;
         }
 
         if (this.direction != Direction.STOP) {
-            
+
             this.Kdirection = this.direction;
-            
+
         }
 
-        /*if (x < 0) {
+        if (x < 0) {
             
             x = 0;
             
@@ -184,26 +170,26 @@ public class Tank {
             
             y = 40;
             
-        }*/
-        
-        if (x + Tank.width > TankClient.Fram_width) {
-            
-            x = TankClient.Fram_width - Tank.width;
-            
         }
         
+        if (x + Tank.width > TankClient.Fram_width) {
+
+            x = TankClient.Fram_width - Tank.width;
+
+        }
+
         if (y + Tank.length > TankClient.Fram_length) {
-            
+
             y = TankClient.Fram_length - Tank.length;
-            
+
         }
 
         if (!good) {
-            
+
             Direction[] directons = Direction.values();
-            
+
             if (step == 0) {
-                
+
                 step = r.nextInt(12) + 3;
                 int mod = r.nextInt(9);
                 if (playertankaround()) {
@@ -296,14 +282,14 @@ public class Tank {
         return 4;
     }
 
-    private void changToOldDir() { 
+    private void changToOldDir() {
         x = oldX;
         y = oldY;
     }
 
     public void keyPressed(KeyEvent e) { //check Anthony's file, delete all player == 1 instructions
         int key = e.getKeyCode();
-        /*if (player == 1) {
+        if (player == 1) {
             switch (key) {
                 case KeyEvent.VK_R:
                     tc.tanks.clear();
@@ -328,9 +314,7 @@ public class Tank {
                     }
 
                     tc.homeTank = new Tank(300, 560, true, Direction.STOP, tc, 0);
-                    if (!tc.home.isLive()) {
-                        tc.home.setLive(true);
-                    }
+
                     TankClient abc = new TankClient();
                     if (tc.Player2) {
                         abc.Player2 = true;
@@ -352,8 +336,8 @@ public class Tank {
                     bD = true;
                     break;
             }
-        }*/
-        
+        }
+
         if (player == 2) {
             switch (key) {
                 case KeyEvent.VK_RIGHT:
@@ -521,19 +505,6 @@ public class Tank {
             g.fillRect(375, 585, w, 10);
             g.setColor(c);
         }
-    }
-
-    public boolean eat(Life b) {  //healing algorithm, has no relevance (delete?)
-        if (this.live && b.isLive() && this.getRect().intersects(b.getRect())) {
-            if (this.life <= 100) {
-                this.life = this.life + 100;
-            } else {
-                this.life = 200;
-            }
-            b.setLive(false);
-            return true;
-        }
-        return false;
     }
 
     public int getX() {

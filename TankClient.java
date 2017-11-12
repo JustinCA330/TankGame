@@ -110,10 +110,10 @@ public class TankClient extends Frame implements ActionListener {
         g.setColor(c);
 
         homeTank.draw(g);
-        homeTank.eat(life);
+      
         if (Player2) {
             homeTank2.draw(g);
-            homeTank2.eat(life);
+            
         }
 
         for (int i = 0; i < bullets.size(); i++) {
