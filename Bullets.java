@@ -180,13 +180,4 @@ public class Bullets {
 		return false;
 	}
 
-	public boolean hitHome() { 
-		if (this.live && this.getRect().intersects(tc.home.getRect())) {
-			this.live = false;
-			this.tc.home.setLive(false); 
-			return true;
-		}
-		return false;
-	}
-
 }
