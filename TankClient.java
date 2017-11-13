@@ -27,7 +27,7 @@ public class TankClient extends Frame implements ActionListener {
     List<Bullets> bullets = new ArrayList<Bullets>();
     List<BreakableWall> homeWall = new ArrayList<BreakableWall>();
     List<BreakableWall> otherWall = new ArrayList<BreakableWall>();
-    List<Wall> Wall = new ArrayList<Wall>();
+    List<Wall> unbreakableWall = new ArrayList<Wall>();
 
     public void update(Graphics g) {
 
@@ -126,8 +126,8 @@ public class TankClient extends Frame implements ActionListener {
                 Bullets bts = bullets.get(j);
                 m.hitBullet(bts);
             }
-            for (int j = 0; j < Wall.size(); j++) {
-                Wall mw = Wall.get(j);
+            for (int j = 0; j < unbreakableWall.size(); j++) {
+                Wall mw = unbreakableWall.get(j);
                 m.hitWall(mw);
             }
 
@@ -156,13 +156,13 @@ public class TankClient extends Frame implements ActionListener {
                 t.collideWithWall(cw);
                 cw.draw(g);
             }
-            for (int j = 0; j < Wall.size(); j++) {
-                Wall mw = Wall.get(j);
+            for (int j = 0; j < unbreakableWall.size(); j++) {
+                Wall mw = unbreakableWall.get(j);
                 t.collideWithWall(mw);
                 mw.draw(g);
             }
 
-            t.collideWithTanks(tanks);
+            t.collideWithTanks(homeTank2);
 
             t.draw(g);
         }
@@ -177,19 +177,19 @@ public class TankClient extends Frame implements ActionListener {
             cw.draw(g);
         }
 
-        for (int i = 0; i < Wall.size(); i++) {
-            Wall mw = Wall.get(i);
+        for (int i = 0; i < unbreakableWall.size(); i++) {
+            Wall mw = unbreakableWall.get(i);
             mw.draw(g);
         }
 
-        homeTank.collideWithTanks(tanks);
+        homeTank.collideWithTanks(homeTank2);
 
         if (Player2) {
-            homeTank2.collideWithTanks(tanks);
+            homeTank2.collideWithTanks(homeTank);
         }
 
-        for (int i = 0; i < Wall.size(); i++) {
-            Wall w = Wall.get(i);
+        for (int i = 0; i < unbreakableWall.size(); i++) {
+            Wall w = unbreakableWall.get(i);
             homeTank.collideWithWall(w);
             if (Player2) {
                 homeTank2.collideWithWall(w);
@@ -296,10 +296,10 @@ public class TankClient extends Frame implements ActionListener {
 
         for (int i = 0; i < 20; i++) {
             if (i < 10) {
-                Wall.add(new Wall(140 + 30 * i, 150, this));
-                Wall.add(new Wall(600, 400 + 20 * (i), this));
+                unbreakableWall.add(new Wall(140 + 30 * i, 150, this));
+                unbreakableWall.add(new Wall(600, 400 + 20 * (i), this));
             } else if (i < 20) {
-                Wall.add(new Wall(140 + 30 * (i - 10), 180, this));
+                unbreakableWall.add(new Wall(140 + 30 * (i - 10), 180, this));
             }
 
         }

@@ -64,16 +64,16 @@ public class Tank {
 
     public void draw(Graphics g) {
 
-        if (!live) {
-            if (!good) {
-
-                tc.tanks.remove(this);
-
-            }
-
-            return;
-
+        /* if (!live) {
+        if (!good) {
+        
+        tc.tanks.remove(this);
+        
         }
+        
+        return;
+        
+        }*/
 
         switch (Kdirection) {
             case D:
@@ -241,22 +241,6 @@ public class Tank {
         Rectangle a = new Rectangle(rx, ry, 60, 60);
         if (this.live && a.intersects(tc.homeTank.getRect())) {
             return true;
-        }
-        return false;
-    }
-
-    public boolean collideWithTanks(java.util.List<Tank> tanks) {
-        
-        for (int i = 0; i < tanks.size(); i++) {
-            Tank t = tanks.get(i);
-            if (this != t) {
-                if (this.live && t.isLive()
-                        && this.getRect().intersects(t.getRect())) {
-                    this.changToOldDir();
-                    t.changToOldDir();
-                    return true;
-                }
-            }
         }
         return false;
     }
@@ -473,20 +457,24 @@ public class Tank {
         return false;
     }
 
-    /*public boolean collideWithTanks(java.util.List<Tank> tanks) {
-        for (int i = 0; i < tanks.size(); i++) {
-            Tank t = tanks.get(i);
-            if (this != t) {
-                if (this.live && t.isLive()
-                        && this.getRect().intersects(t.getRect())) {
-                    this.changToOldDir();
-                    t.changToOldDir();
-                    return true;
-                }
-            }
+    public boolean collideWithTanks(Tank w) {
+        /*for (int i = 0; i < tanks.size(); i++) {
+        Tank t = tanks.get(i);
+        if (this != t) {
+        if (this.live && t.isLive()
+        && this.getRect().intersects(t.getRect())) {
+        this.changToOldDir();
+        t.changToOldDir();
+        return true;
+        }
+        }
+        }*/
+        if(this.live && this.getRect().intersects(w.getRect())){
+            this.changToOldDir();
+            return true;
         }
         return false;
-    }*/
+    }
 
     public int getLife() {
         return life;

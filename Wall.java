@@ -11,7 +11,7 @@ public class Wall {
 	private static Toolkit tk = Toolkit.getDefaultToolkit();
 	private static Image[] wallImags = null;
 	static {
-		wallImags = new Image[] { tk.getImage(BreakableWall.class
+		wallImags = new Image[] { tk.getImage(Wall.class
 				.getResource("Images/metalWall.gif")), };
 	}
 
