@@ -116,7 +116,6 @@ public class TankClient extends Frame implements ActionListener {
 
         for (int i = 0; i < bullets.size(); i++) {
             Bullets m = bullets.get(i);
-            m.hitTanks(tanks);
             m.hitTank(homeTank);
             m.hitTank(homeTank2);
             for (int j = 0; j < bullets.size(); j++) {

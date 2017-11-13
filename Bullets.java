@@ -124,14 +124,6 @@ public class Bullets {
 		return new Rectangle(x, y, width, length);
 	}
 
-	public boolean hitTanks(List<Tank> tanks) {
-		for (int i = 0; i < tanks.size(); i++) {
-			if (hitTank(tanks.get(i))) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	public boolean hitTank(Tank t) { 
 
@@ -159,7 +151,7 @@ public class Bullets {
 		if (this.live && this.getRect().intersects(w.getRect())) {
 			this.live = false;
 			this.tc.otherWall.remove(w); 
-			this.tc.homeWall.remove(w);
+			
 			return true;
 		}
 		return false;
