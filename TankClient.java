@@ -49,23 +49,13 @@ public class TankClient extends Frame implements ActionListener {
 
         Font f1 = g.getFont();
 
-        if (!Player2) {
-            g.drawString("" + tanks.size(), 400, 70);
-        } else {
-            g.drawString("" + tanks.size(), 300, 70);
-        }
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        if (!Player2) {
-            g.drawString("Life: ", 580, 70);
-        } else {
-            g.drawString("Life: ", 95, 70);
-        }
+       
         g.setFont(new Font("Arial", Font.PLAIN, 25));
-        if (!Player2) {
-            g.drawString("" + homeTank.getLife(), 650, 70);
-        } else {
-            g.drawString("Player 1: " + homeTank.getLife() + "    Player 2:" + homeTank2.getLife(), 350, 70);
-        }
+        
+            g.drawString("Player 1 Health: " + homeTank.getLife(), 00, 70);
+            g.drawString("Player 2 Health:" + homeTank2.getLife(), 575, 70);
+        
         g.setFont(f1);
         
             if (homeTank2.isLive() == false && homeTank.isLive() == true) {
