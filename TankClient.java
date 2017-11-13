@@ -72,7 +72,6 @@ public class TankClient extends Frame implements ActionListener {
                 Font f = g.getFont();
                 g.setFont(new Font("Arial", Font.BOLD, 60));
                 this.otherWall.clear();
-                g.drawString("Congratulations! ", 200, 300);
                 g.setFont(f);
                 win = true;
             }
@@ -91,7 +90,6 @@ public class TankClient extends Frame implements ActionListener {
                 Font f = g.getFont();
                 g.setFont(new Font("Arial", Font.BOLD, 60));
                 this.otherWall.clear();
-                g.drawString("Congratulations! ", 200, 300);
                 g.setFont(f);
                 win = true;
             }
