@@ -217,8 +217,6 @@ public class TankClient extends Frame implements ActionListener {
         jmi8.setActionCommand("level3");
         jmi9.addActionListener(this);
         jmi9.setActionCommand("level4");
-        jmi10.addActionListener(this);
-        jmi10.setActionCommand("Player2");
 
         this.setMenuBar(jmb);
         this.setVisible(true);
@@ -267,6 +265,8 @@ public class TankClient extends Frame implements ActionListener {
 
     public static void main(String[] args) {
         new TankClient();
+         TankClient Player2add = new TankClient();
+         Player2add.Player2 = true;
     }
 
     private class PaintThread implements Runnable {
@@ -301,59 +301,25 @@ public class TankClient extends Frame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("NewGame")) {
-            printable = false;
-            Object[] options = {"Confirm", "Cancel"};
-            int response = JOptionPane.showOptionDialog(this, "New game?", "",
-                    JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                    options, options[0]);
-            if (response == 0) {
-
                 printable = true;
                 this.dispose();
                 new TankClient();
-            } else {
-                printable = true;
+                TankClient Player2add = new TankClient();
+                Player2add.Player2 = true;
                 new Thread(new PaintThread()).start();
-            }
 
         } else if (e.getActionCommand().endsWith("Stop")) {
             printable = false;
         } else if (e.getActionCommand().equals("Continue")) {
-
             if (!printable) {
                 printable = true;
                 new Thread(new PaintThread()).start();
             }
         } else if (e.getActionCommand().equals("Exit")) {
             printable = false;
-            Object[] options = {"Confirm", "Cancel"};
-            int response = JOptionPane.showOptionDialog(this, "Confirm to exit?", "",
-                    JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                    options, options[0]);
-            if (response == 0) {
                 System.out.println("break down");
                 System.exit(0);
-            } else {
-                printable = true;
-                new Thread(new PaintThread()).start();
 
-            }
-
-        } else if (e.getActionCommand().equals("Player2")) {
-            printable = false;
-            Object[] options = {"Confirm", "Cancel"};
-            int response = JOptionPane.showOptionDialog(this, "Confirm to add player2?", "",
-                    JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                    options, options[0]);
-            if (response == 0) {
-                printable = true;
-                this.dispose();
-                TankClient Player2add = new TankClient();
-                Player2add.Player2 = true;
-            } else {
-                printable = true;
-                new Thread(new PaintThread()).start();
-            }
         } else if (e.getActionCommand().equals("level1")) {
             Tank.count = 12;
             Tank.speedX = 6;
