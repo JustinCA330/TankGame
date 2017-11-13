@@ -9,10 +9,10 @@ public class Tank {
     public static int count = 0;
     public static final int width = 35, length = 35;
     private Direction direction = Direction.STOP;
-    private Direction Kdirection = Direction.L; //what is Kdirection?
+    private Direction Kdirection = Direction.L;
     TankClient tc;
     private int player = 0;
-    private boolean good; //what does 'good' relate to?
+    private boolean good;
     private int x, y;
     private int oldX, oldY;
     private boolean live = true;
@@ -29,7 +29,6 @@ public class Tank {
     static {
 
         tankImags = new Image[]{
-            
             tk.getImage(BombTank.class.getResource("Images/tankD.gif")),
             tk.getImage(BombTank.class.getResource("Images/tankU.gif")),
             tk.getImage(BombTank.class.getResource("Images/tankL.gif")),
@@ -76,7 +75,7 @@ public class Tank {
 
         }
 
-        switch (Kdirection) { //delete all the player == 1 instructions
+        switch (Kdirection) {
             case D:
                 if (player == 1) {
 
@@ -98,7 +97,7 @@ public class Tank {
 
                     g.drawImage(tankImags[9], x, y, null);
 
-                } 
+                }
                 break;
 
             case L:
@@ -110,7 +109,7 @@ public class Tank {
 
                     g.drawImage(tankImags[10], x, y, null);
 
-                } 
+                }
                 break;
 
             case R:
@@ -122,7 +121,7 @@ public class Tank {
 
                     g.drawImage(tankImags[11], x, y, null);
 
-                } 
+                }
                 break;
         }
         move();
@@ -161,17 +160,17 @@ public class Tank {
         }
 
         if (x < 0) {
-            
+
             x = 0;
-            
+
         }
-        
+
         if (y < 40) {
-            
+
             y = 40;
-            
+
         }
-        
+
         if (x + Tank.width > TankClient.Fram_width) {
 
             x = TankClient.Fram_width - Tank.width;
@@ -246,6 +245,22 @@ public class Tank {
         return false;
     }
 
+    public boolean collideWithTanks(java.util.List<Tank> tanks) {
+        
+        for (int i = 0; i < tanks.size(); i++) {
+            Tank t = tanks.get(i);
+            if (this != t) {
+                if (this.live && t.isLive()
+                        && this.getRect().intersects(t.getRect())) {
+                    this.changToOldDir();
+                    t.changToOldDir();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public int getzone(int x, int y) {
         int tempx = x;
         int tempy = y;
@@ -287,31 +302,15 @@ public class Tank {
         y = oldY;
     }
 
-    public void keyPressed(KeyEvent e) { //check Anthony's file, delete all player == 1 instructions
-        int key = e.getKeyCode();
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
         if (player == 1) {
-            switch (key) {
+            switch (code) {
                 case KeyEvent.VK_R:
-                    tc.tanks.clear();
-                    tc.bullets.clear();
+                    /*tc.bullets.clear();
                     tc.otherWall.clear();
-                    tc.homeWall.clear();
-                    tc.Wall.clear();
+                    tc.Wall.clear();*/
                     tc.homeTank.setLive(false);
-                    if (tc.tanks.size() == 0) {
-                        for (int i = 0; i < 20; i++) {
-                            if (i < 9) {
-                                tc.tanks.add(new Tank(150 + 70 * i, 40, false,
-                                        Direction.R, tc, 0));
-                            } else if (i < 15) {
-                                tc.tanks.add(new Tank(700, 140 + 50 * (i - 6), false,
-                                        Direction.D, tc, 0));
-                            } else {
-                                tc.tanks.add(new Tank(10, 50 * (i - 12), false,
-                                        Direction.L, tc, 0));
-                            }
-                        }
-                    }
 
                     tc.homeTank = new Tank(300, 560, true, Direction.STOP, tc, 0);
 
@@ -339,7 +338,7 @@ public class Tank {
         }
 
         if (player == 2) {
-            switch (key) {
+            switch (code) {
                 case KeyEvent.VK_RIGHT:
                     bR = true;
                     break;
@@ -375,9 +374,9 @@ public class Tank {
     }
 
     public void keyReleased(KeyEvent e) { //same as keyPressed
-        int key = e.getKeyCode();
+        int code = e.getKeyCode();
         if (player == 1) {
-            switch (key) {
+            switch (code) {
 
                 case KeyEvent.VK_F:
                     fire();
@@ -402,7 +401,7 @@ public class Tank {
             }
         }
         if (player == 2) {
-            switch (key) {
+            switch (code) {
 
                 case KeyEvent.VK_SLASH:
                     fire();
@@ -430,6 +429,7 @@ public class Tank {
     }
 
     public Bullets fire() {
+        
         if (!live) {
             return null;
         }
@@ -438,6 +438,7 @@ public class Tank {
         Bullets m = new Bullets(x, y + 2, good, Kdirection, this.tc);
         tc.bullets.add(m);
         return m;
+        
     }
 
     public Rectangle getRect() {
@@ -472,7 +473,7 @@ public class Tank {
         return false;
     }
 
-    public boolean collideWithTanks(java.util.List<Tank> tanks) {
+    /*public boolean collideWithTanks(java.util.List<Tank> tanks) {
         for (int i = 0; i < tanks.size(); i++) {
             Tank t = tanks.get(i);
             if (this != t) {
@@ -485,7 +486,7 @@ public class Tank {
             }
         }
         return false;
-    }
+    }*/
 
     public int getLife() {
         return life;
