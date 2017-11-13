@@ -458,19 +458,9 @@ public class Tank {
     }
 
     public boolean collideWithTanks(Tank w) {
-        /*for (int i = 0; i < tanks.size(); i++) {
-        Tank t = tanks.get(i);
-        if (this != t) {
-        if (this.live && t.isLive()
-        && this.getRect().intersects(t.getRect())) {
-        this.changToOldDir();
-        t.changToOldDir();
-        return true;
-        }
-        }
-        }*/
         if(this.live && this.getRect().intersects(w.getRect())){
             this.changToOldDir();
+            w.changToOldDir();
             return true;
         }
         return false;

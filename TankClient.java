@@ -25,7 +25,7 @@ public class TankClient extends Frame implements ActionListener {
     List<Tank> tanks = new ArrayList<Tank>();
     List<BombTank> bombTanks = new ArrayList<BombTank>();
     List<Bullets> bullets = new ArrayList<Bullets>();
-    List<BreakableWall> homeWall = new ArrayList<BreakableWall>();
+   // List<BreakableWall> homeWall = new ArrayList<BreakableWall>();
     List<BreakableWall> otherWall = new ArrayList<BreakableWall>();
     List<Wall> unbreakableWall = new ArrayList<Wall>();
 
@@ -67,51 +67,24 @@ public class TankClient extends Frame implements ActionListener {
             g.drawString("Player 1: " + homeTank.getLife() + "    Player 2:" + homeTank2.getLife(), 350, 70);
         }
         g.setFont(f1);
-        if (!Player2) {
-            if (tanks.size() == 0 && homeTank.isLive() && lose == false) {
-                Font f = g.getFont();
-                g.setFont(new Font("Arial", Font.BOLD, 60));
-                this.otherWall.clear();
-                g.setFont(f);
-                win = true;
-            }
-
-            if (homeTank.isLive() == false && win == false) {
+        
+            if (homeTank2.isLive() == false && homeTank.isLive() == true) {
                 Font f = g.getFont();
                 g.setFont(new Font("Arial", Font.BOLD, 40));
                 tanks.clear();
                 bullets.clear();
-                g.drawString("Sorry. You lose!", 200, 300);
-                lose = true;
-                g.setFont(f);
-            }
-        } else {
-            if (tanks.size() == 0 && (homeTank.isLive() || homeTank2.isLive()) && lose == false) {
-                Font f = g.getFont();
-                g.setFont(new Font("Arial", Font.BOLD, 60));
-                this.otherWall.clear();
-                g.setFont(f);
-                win = true;
-            }
-
-            if (homeTank.isLive() == false && homeTank2.isLive() == false && win == false) {
-                Font f = g.getFont();
-                g.setFont(new Font("Arial", Font.BOLD, 40));
-                tanks.clear();
-                bullets.clear();
-                g.drawString("Sorry. You lose!", 200, 300);
+                g.drawString("PLAYER 1 WINS!!", 200, 300);
                 System.out.println("2");
                 g.setFont(f);
                 lose = true;
             }
-        }
+        
         g.setColor(c);
 
         homeTank.draw(g);
       
         if (Player2) {
             homeTank2.draw(g);
-            
         }
 
         for (int i = 0; i < bullets.size(); i++) {
@@ -134,22 +107,12 @@ public class TankClient extends Frame implements ActionListener {
                 BreakableWall w = otherWall.get(j);
                 m.hitWall(w);
             }
-
-            for (int j = 0; j < homeWall.size(); j++) {
-                BreakableWall cw = homeWall.get(j);
-                m.hitWall(cw);
-            }
             m.draw(g);
         }
 
         for (int i = 0; i < tanks.size(); i++) {
             Tank t = tanks.get(i);
 
-            for (int j = 0; j < homeWall.size(); j++) {
-                BreakableWall cw = homeWall.get(j);
-                t.collideWithWall(cw);
-                cw.draw(g);
-            }
             for (int j = 0; j < otherWall.size(); j++) {
                 BreakableWall cw = otherWall.get(j);
                 t.collideWithWall(cw);
@@ -203,15 +166,6 @@ public class TankClient extends Frame implements ActionListener {
                 homeTank2.collideWithWall(cw);
             }
             cw.draw(g);
-        }
-
-        for (int i = 0; i < homeWall.size(); i++) {
-            BreakableWall w = homeWall.get(i);
-            homeTank.collideWithWall(w);
-            if (Player2) {
-                homeTank2.collideWithWall(w);
-            }
-            w.draw(g);
         }
 
     }
