@@ -29,6 +29,7 @@ public class Tank {
     static {
 
         tankImags = new Image[]{
+            
             tk.getImage(BombTank.class.getResource("Images/tankD.gif")),
             tk.getImage(BombTank.class.getResource("Images/tankU.gif")),
             tk.getImage(BombTank.class.getResource("Images/tankL.gif")),
@@ -41,6 +42,7 @@ public class Tank {
             tk.getImage(BombTank.class.getResource("Images/HtankU2.gif")),
             tk.getImage(BombTank.class.getResource("Images/HtankL2.gif")),
             tk.getImage(BombTank.class.getResource("Images/HtankR2.gif")),};
+        
     }
 
     public Tank(int x, int y, boolean good) {
@@ -74,7 +76,7 @@ public class Tank {
         return;
         
         }*/
-
+        
         switch (Kdirection) {
             case D:
                 if (player == 1) {
@@ -191,63 +193,101 @@ public class Tank {
 
                 step = r.nextInt(12) + 3;
                 int mod = r.nextInt(9);
+
                 if (playertankaround()) {
                     if (x == tc.homeTank.x) {
                         if (y > tc.homeTank.y) {
+
                             direction = directons[1];
+
                         } else if (y < tc.homeTank.y) {
+
                             direction = directons[3];
+
                         }
+
                     } else if (y == tc.homeTank.y) {
                         if (x > tc.homeTank.x) {
+
                             direction = directons[0];
+
                         } else if (x < tc.homeTank.x) {
+
                             direction = directons[2];
+
                         }
+
                     } else {
+
                         int rn = r.nextInt(directons.length);
                         direction = directons[rn];
+
                     }
+
                     rate = 2;
+
                 } else if (mod == 1) {
+
                     rate = 1;
+
                 } else if (1 < mod && mod <= 3) {
+
                     rate = 1;
+
                 } else {
+
                     int rn = r.nextInt(directons.length);
                     direction = directons[rn];
                     rate = 1;
+
                 }
             }
             step--;
             if (rate == 2) {
                 if (r.nextInt(40) > 35) {
+
                     this.fire();
+
                 }
             } else if (r.nextInt(40) > 38) {
+
                 this.fire();
+
             }
         }
     }
 
     public boolean playertankaround() {
+
         int rx = x - 15, ry = y - 15;
+
         if ((x - 15) < 0) {
+
             rx = 0;
+
         }
+
         if ((y - 15) < 0) {
+
             ry = 0;
+
         }
+
         Rectangle a = new Rectangle(rx, ry, 60, 60);
+
         if (this.live && a.intersects(tc.homeTank.getRect())) {
+
             return true;
+
         }
         return false;
     }
 
     public int getzone(int x, int y) {
+
         int tempx = x;
         int tempy = y;
+
         if (tempx < 85 && tempy < 300) {
             return 11;
         } else if (tempx > 85 && tempx < 140 && tempy > 0 && tempy < 100) {
@@ -275,19 +315,25 @@ public class Tank {
     }
 
     public int getdirect(int a, int b) {
-        if (b == 13) {
 
+        if (b == 13) {
         }
+
         return 4;
+
     }
 
     private void changToOldDir() {
+
         x = oldX;
         y = oldY;
+
     }
 
     public void keyPressed(KeyEvent e) {
+
         int code = e.getKeyCode();
+
         if (player == 1) {
             switch (code) {
                 case KeyEvent.VK_R:
@@ -299,10 +345,14 @@ public class Tank {
                     tc.homeTank = new Tank(300, 560, true, Direction.STOP, tc, 0);
 
                     TankClient abc = new TankClient();
+
                     if (tc.Player2) {
+
                         abc.Player2 = true;
+
                     }
                     break;
+
                 case KeyEvent.VK_D:
                     bR = true;
                     break;
@@ -384,6 +434,7 @@ public class Tank {
 
             }
         }
+        
         if (player == 2) {
             switch (code) {
 
@@ -413,38 +464,51 @@ public class Tank {
     }
 
     public Bullets fire() {
-        
+
         if (!live) {
+            
             return null;
+            
         }
+        
         int x = this.x + Tank.width / 2 - Bullets.width / 2;
         int y = this.y + Tank.length / 2 - Bullets.length / 2;
         Bullets m = new Bullets(x, y + 2, good, Kdirection, this.tc);
         tc.bullets.add(m);
         return m;
-        
+
     }
 
     public Rectangle getRect() {
+        
         return new Rectangle(x, y, width, length);
+        
     }
 
     public boolean isLive() {
+        
         return live;
+        
     }
 
     public void setLive(boolean live) {
+        
         this.live = live;
+        
     }
 
     public boolean isGood() {
+        
         return good;
+        
     }
 
     public boolean collideWithWall(BreakableWall w) { //Collision.java?
         if (this.live && this.getRect().intersects(w.getRect())) {
+            
             this.changToOldDir();
             return true;
+            
         }
         return false;
     }
@@ -458,39 +522,51 @@ public class Tank {
     }
 
     public boolean collideWithTanks(Tank w) {
-        if(this.live && this.getRect().intersects(w.getRect())){
+        if (this.live && this.getRect().intersects(w.getRect())) {
+            
             this.changToOldDir();
             w.changToOldDir();
             return true;
+            
         }
         return false;
     }
 
     public int getLife() {
+        
         return life;
+        
     }
 
     public void setLife(int life) {
+        
         this.life = life;
+        
     }
 
     private class DrawLifeBar { //make into another class?
 
         public void draw(Graphics g) {
+            
             Color c = g.getColor();
             g.setColor(Color.RED);
             g.drawRect(375, 585, width, 10);
             int w = width * life / 200;
             g.fillRect(375, 585, w, 10);
             g.setColor(c);
+            
         }
     }
 
     public int getX() {
+        
         return x;
+        
     }
 
     public int getY() {
+        
         return y;
+        
     }
 }

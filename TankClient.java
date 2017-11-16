@@ -25,7 +25,7 @@ public class TankClient extends Frame implements ActionListener {
     List<Tank> tanks = new ArrayList<Tank>();
     List<BombTank> bombTanks = new ArrayList<BombTank>();
     List<Bullets> bullets = new ArrayList<Bullets>();
-   // List<BreakableWall> homeWall = new ArrayList<BreakableWall>();
+    // List<BreakableWall> homeWall = new ArrayList<BreakableWall>();
     List<BreakableWall> otherWall = new ArrayList<BreakableWall>();
     List<Wall> unbreakableWall = new ArrayList<Wall>();
 
@@ -50,29 +50,29 @@ public class TankClient extends Frame implements ActionListener {
         Font f1 = g.getFont();
 
         g.setFont(new Font("Arial", Font.BOLD, 20));
-       
+
         g.setFont(new Font("Arial", Font.PLAIN, 25));
-        
-            g.drawString("Player 1 Health: " + homeTank.getLife(), 00, 70);
-            g.drawString("Player 2 Health:" + homeTank2.getLife(), 575, 70);
-        
+
+        g.drawString("Player 1 Health: " + homeTank.getLife(), 00, 70);
+        g.drawString("Player 2 Health:" + homeTank2.getLife(), 575, 70);
+
         g.setFont(f1);
-        
-            if (homeTank2.isLive() == false && homeTank.isLive() == true) {
-                Font f = g.getFont();
-                g.setFont(new Font("Arial", Font.BOLD, 40));
-                tanks.clear();
-                bullets.clear();
-                g.drawString("PLAYER 1 WINS!!", 200, 300);
-                System.out.println("2");
-                g.setFont(f);
-                lose = true;
-            }
-        
+
+        if (homeTank2.isLive() == false && homeTank.isLive() == true) {
+            Font f = g.getFont();
+            g.setFont(new Font("Arial", Font.BOLD, 40));
+            tanks.clear();
+            bullets.clear();
+            g.drawString("PLAYER 1 WINS!!", 200, 300);
+            System.out.println("2");
+            g.setFont(f);
+            lose = true;
+        }
+
         g.setColor(c);
 
         homeTank.draw(g);
-      
+
         if (Player2) {
             homeTank2.draw(g);
         }
@@ -222,25 +222,43 @@ public class TankClient extends Frame implements ActionListener {
         this.setVisible(true);
 
         for (int i = 0; i < 32; i++) {
-            if (i < 16) {
-                otherWall.add(new BreakableWall(200 + 21 * i, 300, this));
-                otherWall.add(new BreakableWall(500 + 21 * i, 180, this));
-                otherWall.add(new BreakableWall(200, 400 + 21 * i, this));
-                otherWall.add(new BreakableWall(500, 400 + 21 * i, this));
-            } else if (i < 32) {
-                otherWall.add(new BreakableWall(200 + 21 * (i - 16), 320, this));
-                otherWall.add(new BreakableWall(500 + 21 * (i - 16), 220, this));
-                otherWall.add(new BreakableWall(222, 400 + 21 * (i - 16), this));
-                otherWall.add(new BreakableWall(522, 400 + 21 * (i - 16), this));
+            if (i < 2) {
+                otherWall.add(new BreakableWall(125 + 75 * i, 480, this));
+                otherWall.add(new BreakableWall(275 + 75 * i, 400, this));
+                otherWall.add(new BreakableWall(275 + 75 * i, 555, this));
+                otherWall.add(new BreakableWall(420 + 75 * i, 480, this));
+                otherWall.add(new BreakableWall(570 + 75 * i, 400, this));
+                otherWall.add(new BreakableWall(570 + 75 * i, 555, this));
+
             }
+                        if (i < 7) {
+                otherWall.add(new BreakableWall(100 + 30 * i, 285, this));
+                otherWall.add(new BreakableWall(490 + 30 * i, 285, this));
+
+            }
+            if (i < 8) {
+                otherWall.add(new BreakableWall(125 + 75 * i, 100, this));
+                otherWall.add(new BreakableWall(125 + 75 * i, 175, this));
+
+            }
+
         }
 
         for (int i = 0; i < 20; i++) {
-            if (i < 10) {
-                unbreakableWall.add(new Wall(140 + 30 * i, 150, this));
-                unbreakableWall.add(new Wall(600, 400 + 20 * (i), this));
-            } else if (i < 20) {
-                unbreakableWall.add(new Wall(140 + 30 * (i - 10), 180, this));
+            if (i < 2) {
+                unbreakableWall.add(new Wall(125 + 75 * i, 400, this));
+                unbreakableWall.add(new Wall(125 + 75 * i, 555, this));
+                unbreakableWall.add(new Wall(275 + 75 * i, 480, this));
+                unbreakableWall.add(new Wall(420 + 75 * i, 400, this));
+                unbreakableWall.add(new Wall(420 + 75 * i, 555, this));
+                unbreakableWall.add(new Wall(570 + 75 * i, 480, this));
+
+            }
+            if (i < 9) {
+                unbreakableWall.add(new Wall(100 + 30 * i, 250, this));
+                unbreakableWall.add(new Wall(430 + 30 * i, 250, this));
+                unbreakableWall.add(new Wall(100 + 30 * i, 325, this));
+                unbreakableWall.add(new Wall(430 + 30 * i, 325, this));
             }
 
         }
@@ -265,8 +283,8 @@ public class TankClient extends Frame implements ActionListener {
 
     public static void main(String[] args) {
         new TankClient();
-         TankClient Player2add = new TankClient();
-         Player2add.Player2 = true;
+        TankClient Player2add = new TankClient();
+        Player2add.Player2 = true;
     }
 
     private class PaintThread implements Runnable {
@@ -301,12 +319,12 @@ public class TankClient extends Frame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("NewGame")) {
-                printable = true;
-                this.dispose();
-                new TankClient();
-                TankClient Player2add = new TankClient();
-                Player2add.Player2 = true;
-                new Thread(new PaintThread()).start();
+            printable = true;
+            this.dispose();
+            new TankClient();
+            TankClient Player2add = new TankClient();
+            Player2add.Player2 = true;
+            new Thread(new PaintThread()).start();
 
         } else if (e.getActionCommand().endsWith("Stop")) {
             printable = false;
@@ -317,8 +335,8 @@ public class TankClient extends Frame implements ActionListener {
             }
         } else if (e.getActionCommand().equals("Exit")) {
             printable = false;
-                System.out.println("break down");
-                System.exit(0);
+            System.out.println("break down");
+            System.exit(0);
 
         } else if (e.getActionCommand().equals("level1")) {
             Tank.count = 12;
