@@ -17,8 +17,8 @@ public class TankClient extends Frame implements ActionListener {
             jmi6 = null, jmi7 = null, jmi8 = null, jmi9 = null, jmi10 = null;
     Image screenImage = null;
 
-    Tank homeTank = new Tank(000, 260, true, Direction.STOP, this, 1);
-    Tank homeTank2 = new Tank(800, 260, true, Direction.STOP, this, 2);
+    Tank homeTank = new Tank(000, 288, true, Direction.INITIAL, this, 1);
+    Tank homeTank2 = new Tank(800, 288, true, Direction.INITIAL, this, 2);
     Boolean Player2 = false;
     Life life = new Life();
     Boolean win = false, lose = false;

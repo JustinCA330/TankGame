@@ -125,6 +125,18 @@ public class Tank {
 
                 }
                 break;
+                
+                case INITIAL:
+                if (player == 1) {
+
+                    g.drawImage(tankImags[7], x, y, null);
+
+                } else if (tc.Player2 && player == 2) {
+
+                    g.drawImage(tankImags[10], x, y, null);
+
+                }
+                break;
         }
         move();
     }
@@ -152,6 +164,9 @@ public class Tank {
                 break;
 
             case STOP:
+                break;
+                
+            case INITIAL:
                 break;
         }
 
