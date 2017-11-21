@@ -9,7 +9,7 @@ public class TankClient extends Frame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     public static final int Fram_width = 800;
-    public static final int Fram_length = 600;
+    public static final int Fram_length = 750;
     public static boolean printable = true;
     MenuBar jmb = null;
     Menu jm1 = null, jm2 = null, jm3 = null, jm4 = null, jm5 = null;
@@ -45,7 +45,7 @@ public class TankClient extends Frame implements ActionListener {
     public void framPaint(Graphics g) {
 
         Color c = g.getColor();
-        g.setColor(Color.MAGENTA);
+        g.setColor(Color.WHITE);
 
         Font f1 = g.getFont();
 
@@ -53,8 +53,8 @@ public class TankClient extends Frame implements ActionListener {
 
         g.setFont(new Font("Arial", Font.PLAIN, 25));
 
-        g.drawString("Player 1 Health: " + homeTank.getLife(), 00, 70);
-        g.drawString("Player 2 Health:" + homeTank2.getLife(), 575, 70);
+        g.drawString("Player 1 Health: " + homeTank.getLife(), 50, 715);
+        g.drawString("Player 2 Health:" + homeTank2.getLife(), 500, 715);
 
         g.setFont(f1);
 

@@ -29,7 +29,6 @@ public class Tank {
     static {
 
         tankImags = new Image[]{
-            
             tk.getImage(BombTank.class.getResource("Images/tankD.gif")),
             tk.getImage(BombTank.class.getResource("Images/tankU.gif")),
             tk.getImage(BombTank.class.getResource("Images/tankL.gif")),
@@ -42,7 +41,7 @@ public class Tank {
             tk.getImage(BombTank.class.getResource("Images/HtankU2.gif")),
             tk.getImage(BombTank.class.getResource("Images/HtankL2.gif")),
             tk.getImage(BombTank.class.getResource("Images/HtankR2.gif")),};
-        
+
     }
 
     public Tank(int x, int y, boolean good) {
@@ -76,7 +75,6 @@ public class Tank {
         return;
         
         }*/
-        
         switch (Kdirection) {
             case D:
                 if (player == 1) {
@@ -125,8 +123,8 @@ public class Tank {
 
                 }
                 break;
-                
-                case INITIAL:
+
+            case INITIAL:
                 if (player == 1) {
 
                     g.drawImage(tankImags[7], x, y, null);
@@ -165,7 +163,7 @@ public class Tank {
 
             case STOP:
                 break;
-                
+
             case INITIAL:
                 break;
         }
@@ -449,7 +447,7 @@ public class Tank {
 
             }
         }
-        
+
         if (player == 2) {
             switch (code) {
 
@@ -481,11 +479,11 @@ public class Tank {
     public Bullets fire() {
 
         if (!live) {
-            
+
             return null;
-            
+
         }
-        
+
         int x = this.x + Tank.width / 2 - Bullets.width / 2;
         int y = this.y + Tank.length / 2 - Bullets.length / 2;
         Bullets m = new Bullets(x, y + 2, good, Kdirection, this.tc);
@@ -495,35 +493,35 @@ public class Tank {
     }
 
     public Rectangle getRect() {
-        
+
         return new Rectangle(x, y, width, length);
-        
+
     }
 
     public boolean isLive() {
-        
+
         return live;
-        
+
     }
 
     public void setLive(boolean live) {
-        
+
         this.live = live;
-        
+
     }
 
     public boolean isGood() {
-        
+
         return good;
-        
+
     }
 
     public boolean collideWithWall(BreakableWall w) { //Collision.java?
         if (this.live && this.getRect().intersects(w.getRect())) {
-            
+
             this.changToOldDir();
             return true;
-            
+
         }
         return false;
     }
@@ -538,50 +536,50 @@ public class Tank {
 
     public boolean collideWithTanks(Tank w) {
         if (this.live && this.getRect().intersects(w.getRect())) {
-            
+
             this.changToOldDir();
             w.changToOldDir();
             return true;
-            
+
         }
         return false;
     }
 
     public int getLife() {
-        
+
         return life;
-        
+
     }
 
     public void setLife(int life) {
-        
+
         this.life = life;
-        
+
     }
 
     private class DrawLifeBar { //make into another class?
 
         public void draw(Graphics g) {
-            
+
             Color c = g.getColor();
             g.setColor(Color.RED);
             g.drawRect(375, 585, width, 10);
             int w = width * life / 200;
             g.fillRect(375, 585, w, 10);
             g.setColor(c);
-            
+
         }
     }
 
     public int getX() {
-        
+
         return x;
-        
+
     }
 
     public int getY() {
-        
+
         return y;
-        
+
     }
 }
