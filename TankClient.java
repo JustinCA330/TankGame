@@ -51,8 +51,8 @@ public class TankClient extends Frame implements ActionListener {
 
         g.setFont(new Font("Arial", Font.PLAIN, 25));
 
-        g.drawString("Player 1 Health: " + homeTank.getLife(), 50, 715);
-        g.drawString("Player 2 Health:" + homeTank2.getLife(), 500, 715);
+        g.drawString("Player 1 HP: " + homeTank.getLife(), 50, 715);
+        g.drawString("Player 2 HP:" + homeTank2.getLife(), 500, 715);
 
         g.setFont(f1);
 
