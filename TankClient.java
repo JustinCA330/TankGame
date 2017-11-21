@@ -288,9 +288,8 @@ public class TankClient extends Frame implements ActionListener {
         if (e.getActionCommand().equals("NewGame")) {
             printable = true;
             this.dispose();
-            new TankClient();
-            TankClient Player2add = new TankClient();
-            Player2add.Player2 = true;
+            TankClient newGame = new TankClient();
+            newGame.Player2 = true;
             new Thread(new PaintThread()).start();
 
         } else if (e.getActionCommand().endsWith("Stop")) {
