@@ -83,8 +83,7 @@ public class Bullets {
                 break;
         }
 
-        if (x < 0 || y < 0 || x > TankClient.Fram_width
-                || y > TankClient.Fram_length) {
+        if (x < 0 || y < 0 || x > TankClient.Fram_width || y > TankClient.Fram_length) {
             live = false;
         }
     }
@@ -129,7 +128,6 @@ public class Bullets {
 
         if (this.live && this.getRect().intersects(t.getRect()) && t.isLive()
                 && this.good != t.isGood()) {
-
             BombTank e = new BombTank(t.getX(), t.getY(), tc);
             tc.bombTanks.add(e);
             if (t.isGood()) {
@@ -140,9 +138,7 @@ public class Bullets {
             } else {
                 t.setLive(false);
             }
-
             this.live = false;
-
             return true;
         }
         return false;

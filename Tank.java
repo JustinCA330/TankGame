@@ -350,9 +350,9 @@ public class Tank {
         if (player == 1) {
             switch (code) {
                 case KeyEvent.VK_R:
-                    /*tc.bullets.clear();
+                    tc.bullets.clear();
                     tc.otherWall.clear();
-                    tc.Wall.clear();*/
+                   // tc.breakableWall.clear();
                     tc.homeTank.setLive(false);
 
                     tc.homeTank = new Tank(300, 560, true, Direction.STOP, tc, 0);
@@ -557,7 +557,7 @@ public class Tank {
 
     }
 
-    private class DrawLifeBar { //make into another class?
+    private class DrawLifeBar { 
 
         public void draw(Graphics g) {
 

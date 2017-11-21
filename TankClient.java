@@ -100,9 +100,9 @@ public class TankClient extends Frame implements ActionListener {
                 m.hitWall(w);
             }
             m.draw(g);
+           
         }
 
-       
             for (int j = 0; j < otherWall.size(); j++) {
                 BreakableWall cw = otherWall.get(j);
                 cw.draw(g);
@@ -250,9 +250,8 @@ public class TankClient extends Frame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new TankClient();
-        TankClient Player2add = new TankClient();
-        Player2add.Player2 = true;
+        TankClient startGame = new TankClient();
+        startGame.Player2 = true;
     }
 
     private class PaintThread implements Runnable {
