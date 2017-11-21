@@ -233,8 +233,7 @@ public class TankClient extends Frame implements ActionListener {
 
         this.setSize(Fram_width, Fram_length);
         this.setLocation(280, 50);
-        this
-                .setTitle("CSC413 TANK GAME");
+        this.setTitle("CSC413 TANK GAME");
 
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
