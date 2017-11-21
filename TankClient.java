@@ -12,20 +12,18 @@ public class TankClient extends Frame implements ActionListener {
     public static final int Fram_length = 750;
     public static boolean printable = true;
     MenuBar jmb = null;
-    Menu jm1 = null, jm2 = null, jm3 = null, jm4 = null, jm5 = null;
-    MenuItem jmi1 = null, jmi2 = null, jmi3 = null, jmi4 = null,
-            jmi6 = null, jmi7 = null, jmi8 = null, jmi9 = null, jmi10 = null;
+    Menu jm1 = null, jm2 = null, jm3 = null;
+    MenuItem jmi1 = null, jmi2 = null, jmi3 = null, jmi4 = null;
+    
     Image screenImage = null;
 
     Tank homeTank = new Tank(000, 288, true, Direction.INITIAL, this, 1);
     Tank homeTank2 = new Tank(800, 288, true, Direction.INITIAL, this, 2);
     Boolean Player2 = false;
     Life life = new Life();
-    Boolean win = false, lose = false;
-    List<Tank> tanks = new ArrayList<Tank>();
+    Boolean win = false, loseP1 = false, loseP2 = false;
     List<BombTank> bombTanks = new ArrayList<BombTank>();
     List<Bullets> bullets = new ArrayList<Bullets>();
-    // List<BreakableWall> homeWall = new ArrayList<BreakableWall>();
     List<BreakableWall> otherWall = new ArrayList<BreakableWall>();
     List<Wall> unbreakableWall = new ArrayList<Wall>();
 
@@ -61,21 +59,25 @@ public class TankClient extends Frame implements ActionListener {
         if (homeTank2.isLive() == false && homeTank.isLive() == true) {
             Font f = g.getFont();
             g.setFont(new Font("Arial", Font.BOLD, 40));
-            tanks.clear();
             bullets.clear();
             g.drawString("PLAYER 1 WINS!!", 200, 300);
-            System.out.println("2");
             g.setFont(f);
-            lose = true;
+            loseP2 = true;
+        }
+        if (homeTank2.isLive() == true && homeTank.isLive() == false) {
+            Font f = g.getFont();
+            g.setFont(new Font("Arial", Font.BOLD, 40));
+            bullets.clear();
+            g.drawString("PLAYER 2 WINS!!", 200, 300);
+            g.setFont(f);
+            loseP1 = true;
         }
 
         g.setColor(c);
 
         homeTank.draw(g);
-
-        if (Player2) {
-            homeTank2.draw(g);
-        }
+        homeTank2.draw(g);
+        
 
         for (int i = 0; i < bullets.size(); i++) {
             Bullets m = bullets.get(i);
@@ -100,24 +102,15 @@ public class TankClient extends Frame implements ActionListener {
             m.draw(g);
         }
 
-        for (int i = 0; i < tanks.size(); i++) {
-            Tank t = tanks.get(i);
-
+       
             for (int j = 0; j < otherWall.size(); j++) {
                 BreakableWall cw = otherWall.get(j);
-                t.collideWithWall(cw);
                 cw.draw(g);
             }
             for (int j = 0; j < unbreakableWall.size(); j++) {
                 Wall mw = unbreakableWall.get(j);
-                t.collideWithWall(mw);
                 mw.draw(g);
             }
-
-            t.collideWithTanks(homeTank2);
-
-            t.draw(g);
-        }
 
         for (int i = 0; i < bombTanks.size(); i++) {
             BombTank bt = bombTanks.get(i);
@@ -135,10 +128,8 @@ public class TankClient extends Frame implements ActionListener {
         }
 
         homeTank.collideWithTanks(homeTank2);
-
-        if (Player2) {
-            homeTank2.collideWithTanks(homeTank);
-        }
+        homeTank2.collideWithTanks(homeTank);
+        
 
         for (int i = 0; i < unbreakableWall.size(); i++) {
             Wall w = unbreakableWall.get(i);
@@ -165,20 +156,14 @@ public class TankClient extends Frame implements ActionListener {
         jmb = new MenuBar();
         jm1 = new Menu("Game");
         jm2 = new Menu("Pause/Continue");
-        jm4 = new Menu("Level");
-        jm5 = new Menu("Player 2");
+        
         jm1.setFont(new Font("Arial", Font.BOLD, 15));
         jm2.setFont(new Font("Arial", Font.BOLD, 15));
-        jm4.setFont(new Font("Arial", Font.BOLD, 15));
         jmi1 = new MenuItem("New Game");
         jmi2 = new MenuItem("Exit");
         jmi3 = new MenuItem("Stop");
         jmi4 = new MenuItem("Continue");
-        jmi6 = new MenuItem("Level1");
-        jmi7 = new MenuItem("Level2");
-        jmi8 = new MenuItem("Level3");
-        jmi9 = new MenuItem("Level4");
-        jmi10 = new MenuItem("Add Player 2");
+
         jmi1.setFont(new Font("Arial", Font.BOLD, 15));
         jmi2.setFont(new Font("Arial", Font.BOLD, 15));
         jmi3.setFont(new Font("Arial", Font.BOLD, 15));
@@ -189,17 +174,8 @@ public class TankClient extends Frame implements ActionListener {
         jm2.add(jmi3);
         jm2.add(jmi4);
 
-        jm4.add(jmi6);
-        jm4.add(jmi7);
-        jm4.add(jmi8);
-        jm4.add(jmi9);
-        jm5.add(jmi10);
-
         jmb.add(jm1);
         jmb.add(jm2);
-
-        jmb.add(jm4);
-        jmb.add(jm5);
 
         jmi1.addActionListener(this);
         jmi1.setActionCommand("NewGame");
@@ -209,14 +185,6 @@ public class TankClient extends Frame implements ActionListener {
         jmi3.setActionCommand("Stop");
         jmi4.addActionListener(this);
         jmi4.setActionCommand("Continue");
-        jmi6.addActionListener(this);
-        jmi6.setActionCommand("level1");
-        jmi7.addActionListener(this);
-        jmi7.setActionCommand("level2");
-        jmi8.addActionListener(this);
-        jmi8.setActionCommand("level3");
-        jmi9.addActionListener(this);
-        jmi9.setActionCommand("level4");
 
         this.setMenuBar(jmb);
         this.setVisible(true);
