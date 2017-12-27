@@ -1,7 +1,7 @@
 # csc413-tankgame
 Mariko Ariane Vecta Sampaga
 909519291
-mariko.sampaga@gmail.com
+mariko.vecta@gmail.com
 
 Justin Abarquez
 911062131
